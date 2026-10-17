@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10253b">
+  <meta name="description" content="Launch Ledger: an interactive product release decision lab.">
+  <title>Launch Ledger · Product release decision lab</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-row"><a class="brand" href="#top">LAUNCH <span>LEDGER</span></a><a class="header-link" href="https://github.com/Poojaahegde/launch-ledger/blob/master/PRD.md">Read the product brief ↗</a></div>
+  </header>
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div><p class="eyebrow">PRODUCT MANAGEMENT / RELEASE READINESS</p><h1>Make the launch decision <em>explainable.</em></h1><p class="hero-copy">A release is more than a green dashboard. Inspect the evidence, set the guardrails, and leave a clear record of why you would expand, hold, or roll back.</p><div class="hero-actions"><a class="button primary" href="#workspace">Try the decision lab ↓</a><a class="button secondary" href="https://github.com/Poojaahegde/launch-ledger/blob/master/PRD.md">See the PRD ↗</a></div></div>
+      <div class="hero-card"><p class="micro">THE PRODUCT QUESTION</p><strong>Should we expand a new guided setup flow from 10% to 50% of new accounts?</strong><p>The scenario and all values below are illustrative. No live customer data or production launch is represented.</p><div class="mini-flow"><span>10% pilot</span><b>→</b><span>Evidence review</span><b>→</b><span>Decision receipt</span></div></div>
+    </section>
+    <section class="context-grid" aria-label="Decision context">
+      <article><span class="step">01 / Problem</span><h2>Setup stalls early</h2><p>New accounts leave before connecting their first data source. The team proposes a guided setup flow to make that first task easier.</p></article>
+      <article><span class="step">02 / Tradeoff</span><h2>Speed can create friction</h2><p>More guidance may improve activation while increasing support contacts or slowing the page. Expansion needs both benefit and acceptable cost.</p></article>
+      <article><span class="step">03 / Decision</span><h2>Use explicit gates</h2><p>Compare the pilot with the current flow, check instrumentation and rollback readiness, then record the next action.</p></article>
+    </section>
+    <section id="workspace" class="workspace" aria-labelledby="workspace-title">
+      <div class="section-heading"><div><p class="eyebrow">INTERACTIVE WORKSPACE</p><h2 id="workspace-title">Release decision lab</h2><p>Change the illustrative inputs to see how the recommendation responds.</p></div><div class="scenario"><label for="scenario">Sample scenario</label><select id="scenario"><option value="promising">Promising pilot</option><option value="mixed">Mixed signals</option><option value="harm">Guardrail breach</option></select></div></div>
+      <div class="lab-grid">
+        <form id="decision-form" class="panel input-panel">
+          <h3>Pilot evidence</h3><p class="panel-intro">Rates are percentages of eligible new accounts. A support contact counts once per account.</p>
+          <div class="field-pair"><label>Current activation <span>%</span><input id="baseline" type="number" min="0" max="100" step="0.1" required></label><label>Pilot activation <span>%</span><input id="pilot" type="number" min="0" max="100" step="0.1" required></label></div>
+          <div class="field-pair"><label>Current support contacts <span>%</span><input id="supportBaseline" type="number" min="0" max="100" step="0.1" required></label><label>Pilot support contacts <span>%</span><input id="supportPilot" type="number" min="0" max="100" step="0.1" required></label></div>
+          <div class="field-pair"><label>Current p95 load time <span>ms</span><input id="latencyBaseline" type="number" min="1" max="30000" step="1" required></label><label>Pilot p95 load time <span>ms</span><input id="latencyPilot" type="number" min="1" max="30000" step="1" required></label></div>
+          <div class="field-pair"><label>Eligible pilot accounts <span>count</span><input id="sample" type="number" min="0" max="1000000" step="1" required></label><label>Exposure <span>% of eligible</span><input id="exposure" type="number" min="0" max="100" step="1" required></label></div>
+          <div class="check-row"><label><input id="eventsReady" type="checkbox"> Key events and denominators verified</label><label><input id="rollbackReady" type="checkbox"> Rollback owner and switch confirmed</label></div>
+          <button class="button primary evaluate" type="submit">Evaluate release →</button>
+        </form>
+        <div class="panel result-panel" aria-live="polite">
+          <div class="result-head"><div><p class="micro">RECOMMENDATION</p><h3 id="verdict">—</h3></div><span id="status-pill" class="pill">Awaiting input</span></div>
+          <p id="summary" class="result-summary">Select a scenario or edit the evidence to evaluate the release.</p>
+          <div class="metrics"><div><span>Activation lift</span><strong id="activation-result">—</strong><small>Expand at ≥ +3.0 percentage points</small></div><div><span>Support contact change</span><strong id="support-result">—</strong><small>Guardrail: ≤ +1.0 point</small></div><div><span>p95 load time change</span><strong id="latency-result">—</strong><small>Guardrail: ≤ +200 ms</small></div></div>
+          <h4>Decision receipt</h4><ul id="reasons" class="reasons"></ul><p class="next-action"><b>Next step:</b> <span id="next-step">Enter complete pilot evidence.</span></p><button id="copy-receipt" class="button secondary" type="button">Copy decision receipt</button><p id="copy-status" class="copy-status" role="status"></p>
+        </div>
+      </div>
+      <p class="footnote">Decision rules are portfolio examples, not statistical proof. A real launch also requires experiment validity, segmented impact, accessibility, privacy, and operational review.</p>
+    </section>
+    <section class="closing"><p class="eyebrow">WHY THIS EXISTS</p><h2>The decision is the deliverable.</h2><p>Launch Ledger makes product judgment inspectable: one customer problem, measurable success, cost guardrails, a rollback path, and an explicit owner for the next move.</p><a href="https://github.com/Poojaahegde/launch-ledger">Explore the repository ↗</a></section>
+  </main>
+  <footer><div class="wrap">Built by <a href="https://github.com/Poojaahegde">Pooja Hegde</a> · Independent portfolio simulation · 2026</div></footer>
+</body>
+</html>
